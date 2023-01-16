@@ -35,6 +35,7 @@ else{
 /* Building a Stack Object */
 
 var Stack = function(){
+
     this.count = 0;
     this.storage = {};
 
@@ -75,7 +76,7 @@ var Stack = function(){
 // console.log(stack.size());
 
 
-/*  SET      */
+/*  SET   */
 
 function mySet(){
 
@@ -84,7 +85,7 @@ function mySet(){
 
     // this method will check for the presence of an element and return true or false
     this.has = function(element){
-        return (collection.indexOf(element) !==1);
+        return (collection.indexOf(element) !==-1);
     }
     // this method will return all the values in the set
 
@@ -177,4 +178,128 @@ return intersectionSet;
       })
     }
 
+
+
 }
+
+// var setA = new mySet();
+// var setB = new mySet();
+
+// setA.add("a");
+// setB.add("b");
+// setB.add("c");
+// setB.add("a");
+// setB.add("d");
+
+// console.log(setA.subSet(setB));
+// console.log(setB.values());
+// console.log(setA.intersection(setB).values())
+
+
+/* QUEUE   */
+
+function Queue(){
+   var  collection = [];
+    this.print = function(){
+        console.log(collection);
+    }
+
+    this.enqueue = function(element){
+        collection.push(element);
+    }
+    this.dequeue = function(){
+        return collection.shift();
+    }
+    this.front = function(){
+        return collection[0];
+    }
+    this.size = function(){
+        return collection.length;
+    }
+    this.isEmpty = function(){
+        return (collection.length === 0);
+    }
+}
+
+// var q = new Queue;
+// q.enqueue("a");
+// q.enqueue("b");
+// q.enqueue("c");
+// q.print();
+// q.dequeue();
+// console.log(q.front());
+// q.print()
+
+/* PRIORITY QUEUE   */
+function ProirityQueue(){
+    var collection = [];
+    this.printCollection = function(){
+        (console.log(collection));
+
+    }
+    this.enqueue = function(element){
+        if(this.isEmpty()){
+            collection.push(element);
+        }else{
+            var added = false;
+            for (var i=0; i<collection.length; i++){
+                if(element[1] < collection[i][1]){ // checking priorities
+                    collection.splice(i,0,element);
+                    added = true;
+                    break;
+
+                } 
+
+            }
+            if(!added)
+            {
+                collection.push(element);
+            }
+        }
+    }
+
+    this.dequeue = function(){
+        var value = collection.shift();
+        return value[0];
+    }
+    this.front = function(){
+        return collection[0];
+    }
+    this.size = function(){
+        return collection.length;
+    }
+
+    this.isEmpty = function(){
+        return (collection.length === 0 );
+    }
+}
+
+// var pq = new ProirityQueue;
+// pq.enqueue(['Beau Carnes', 2]); // where the second index is the priority
+// pq.enqueue(['Jones Carnes', 2]);
+// pq.enqueue(['John Osas', 3]);
+// pq.enqueue(['Osaze Osas', 1]);
+// pq.printCollection();
+// pq.dequeue();
+// pq.front();
+// pq.printCollection();
+
+
+
+
+
+// var bst = new BST();
+// bst.add(1);
+// bst.add(2);
+// bst.add(3);
+
+// console.log(bst.isPresent(3));
+
+// marine images
+// wirelines services images
+// well operaion image is blur
+
+
+
+
+
