@@ -274,12 +274,12 @@ function ProirityQueue(){
     }
 }
 
-// var pq = new ProirityQueue;
+var pq = new ProirityQueue;
 // pq.enqueue(['Beau Carnes', 2]); // where the second index is the priority
-// pq.enqueue(['Jones Carnes', 2]);
-// pq.enqueue(['John Osas', 3]);
+ pq.enqueue(['Jones Carnes', 0]);
+ pq.enqueue(['John Osas', 1]);
 // pq.enqueue(['Osaze Osas', 1]);
-// pq.printCollection();
+pq.printCollection();
 // pq.dequeue();
 // pq.front();
 // pq.printCollection();
