@@ -181,7 +181,7 @@ function strRepArr(array)
 {
 //    var string = array.join();
   var string = array.toString();
-   return string;
+  return string;
 }
 
 /*  Creating New Arrays from Existing Arrays   */
@@ -470,7 +470,7 @@ function columnarProcessingOfArr(array)
     for(var cols = 0; cols < array[rows].length; cols++)
     {
       total += array[rows][cols];
-     
+ 
     }
     studentAverage = total/array[rows].length;
     
@@ -618,22 +618,191 @@ function setOfWords(array)
 
 
 function Temps(){
-  this.data = [];
+  this.monthTemps = [];
   this.weekTemps = [];  // rows
-
-  this.addTemps(val)
+  this.length;
+  
+  this.addTemps = function(temp)
   {
-    var array = [];
-    for(var i = 0; i < this.weekTemps.length; i++)
+    if(this.weekTemps.length >= 7)
     {
-      var col = [];
-      for(var j = 0; j < this.data.length; j++)
+      console.log('Weekly temps is filled');
+      this.weekTemps = [];
+      this.weekTemps.push(temp);
+      if(this.monthTemps.length >= 4)
       {
-        
+     this.monthTemps[this.weekTemps.length] = this.weekTemps;
+     return true;
       }
+      this.monthTemps.push(this.weekTemps);
+      return true;
+    }
+    else{
+      this.weekTemps.push(temp);
+      if(this.monthTemps.length >= 4)
+      {
+        console.log('got here!');
+     this.monthTemps[this.monthTemps.length] = this.weekTemps;
+     return true;
+      }else{
+        console.log('entered here!');
+
+        this.monthTemps.push(this.weekTemps);
+      
+        return true;
+      }
+
     }
   }
+
+  this.addWeeklyTemps = function(week)
+  {
+     
+    if(!Array.isArray(week))
+    {
+      console.log('week data must be an array');
+      return;
+    }
+    this.weekTemps = week;
+    this.monthTemps.push(this.weekTemps);
+    
+  }
+
+  this.addDailyTemps = function(daily)
+  {
+    if(this.weekTemps.length >= 6)
+    {
+      this.weekTemps[7]= daily;
+      return;
+    }else{
+     this.weekTemps.push(daily);
+     return;
+    }
+  }
+
+  this.displayMonthlyTemps = function()
+  {
+    console.log(this.monthTemps);
+  }
+
+
 }
+
+var temps = new Temps();
+
+// temps.addTemps(5);
+// temps.addTemps(6);
+// temps.addTemps(7);
+// temps.addTemps(8);
+// temps.addTemps(9);
+// temps.addTemps(10);
+// temps.addTemps(11);
+// temps.addTemps(12);
+// temps.addWeeklyTemps([1,2,3,4,5,6,6,7]);
+// temps.addWeeklyTemps([1,2,3,4,5,6,6,7]);
+// temps.addWeeklyTemps([1,2,3,4,5,6,6,7]);
+// temps.addWeeklyTemps([1,2,3,4,5,6,6,7]);
+
+
+temps.displayMonthlyTemps();
+
+
+function Letters()
+{
+  this.letterStorage = [];
+  this.dictionary = [];
+  this.storeSingleLetters = function(letter)
+  {
+    // ensure its a letter and a single letter
+
+      if(typeof letter !== 'string')
+      {
+         console.log('not a string');
+         return;
+      }
+
+      // check the length of letter
+      if(letter.length > 1)
+      {
+        
+        // method 1 using split to get the first element of a string
+        var split = letter.split('');
+        var firstElement = split.splice(0,1);
+        var firstElement = firstElement.join('');
+        this.letterStorage.push(firstElement);
+
+       // method 2 using substring to get the first element
+      // var first = letter.substring(0,1)
+      //  console.log(first);
+      //   return;
+      }
+      this.letterStorage.push(letter);
+   
+      return;
+
+      
+  }
+
+  this.displaySingleWord = function()
+  {
+    var singleWord = this.letterStorage.join('');
+    console.log('This is the word '+ singleWord);
+  }
+
+  this.saveWordInDictionary = function(word)
+  {
+    if(typeof word != 'string')
+    {
+      console.log('Only string is allowed');
+      return;
+    }else if(word.length < 3)
+    {
+      console.log('String must be longer three');
+      return;
+    }
+    this.dictionary.push(word);
+    console.log('saved!');
+  }
+
+  this.checkDictionary = function(word)
+  {
+    if(typeof word != 'string')
+    {
+      console.log('Only string is allowed')
+      return;
+    }
+    function check(wd)
+    {
+      return wd == word;
+    }
+
+    var resultString = this.dictionary.filter(check).join('');
+    if(resultString == '')
+    {
+      console.log('Not Found');
+      return;
+    }
+    console.log(resultString);
+
+  }
+  this.displayDictionary = function()
+  {
+    console.log(this.dictionary);
+  };
+}
+
+
+var lt = new Letters();
+lt.storeSingleLetters('Good');
+lt.storeSingleLetters('okay');
+lt.storeSingleLetters('dash');
+
+lt.saveWordInDictionary('all');
+lt.saveWordInDictionary('Bye');
+lt.saveWordInDictionary('Get');
+lt.checkDictionary('Hope');
+
+lt.displayDictionary();
 
 
 
